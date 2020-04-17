@@ -27,9 +27,9 @@
       // 今回やるのはタブメニューです。
       $('.nav li').click(function(){
         var index = $('.nav li').index(this);
-        $('.nav li').removeClass('.contents');
-        $(this).addClass('.contents');
-        $('.contents li').removeClass('.contents').eq(index).addClass('.contrnts');
+        $('.nav li').removeClass('');
+        $(this).addClass('');
+        $('.contents li').removeClass('is-hidden').eq(index).addClass('is-hidden');
       });
       // navの小要素であるliをクリックして、contents内の小要素であるli要素を表示させる。
       // .index() 要素のindexを取得します。
