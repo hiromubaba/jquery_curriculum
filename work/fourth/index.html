@@ -51,10 +51,10 @@
       $(function(){
         $('.menu__list').children().hover(function(){
           $(this).children().stop().slideDown()
-        },
+        },//childrenで子要素を指定して親要素をホバーした時にメニューをしたに出す
         function(){
-          $(this).children().stop().slideUp()
-        })
+          $(this).children('ul').stop().slideUp()
+        })//しまう時はulに当たるメニューだけしまいたいのでchildren('ul')指定。
       });
       // メニューをhoverすると隠れている中のメニューが表示され、メニューから離れると中のメニューが非表示されるプログラムです。
       // [使用するメソッド]
