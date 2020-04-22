@@ -48,6 +48,14 @@
     <script src="../../common/js/jquery.js"></script>
     <script>
       // 今回やるのはドロップメニューです。
+      $(function(){
+        $('.menu__list').children().hover(function(){
+          $(this).children().stop().slideDown()
+        },
+        function(){
+          $(this).children().stop().slideUp()
+        })
+      });
       // メニューをhoverすると隠れている中のメニューが表示され、メニューから離れると中のメニューが非表示されるプログラムです。
       // [使用するメソッド]
       // .hover(関数, 関数) 要素の上にマウスカーソルが乗ると第1引数の関数を実行し、マウスカーソルから離れると第2引数の関数を実行します。
