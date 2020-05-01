@@ -69,9 +69,10 @@
 </div>
 <script src="../../common/js/jquery.js"></script>
 <script>
+$(function() {　//意味調べとく！！！！
 // 第1問  id='q1'の要素の文字色を赤色にせよ。
 //  ↓ セレクタ
-$('#q1').css('color','red') 
+$('#q1').css('color','red')
 // 第2問  id='q2'の要素をクリックしたら背景色をピンクにせよ。
 $('#q2').click(function(){
   $(this).css('background-color','cadetblue')
@@ -79,7 +80,7 @@ $('#q2').click(function(){
 // 第3問  id='q3'の要素をクリックしたら2秒かけてフェードアウトさせよ。
 $('#q3').click(fadeOut);//.click()とfadeOut()引数持たせる
 function fadeOut(){
-  $(this).fadeOut(2000);
+  $(this).fadeOut(2000);//２０００ミリ
 }
 // 第4問  id='q4'の要素をクリックしたらこの要素の前後とこの要素内の前後にテキストを挿入せよ。
 $('#q4').click(function(){
@@ -89,38 +90,39 @@ $('#q4').click(function(){
          .after('DOMの後');//アフター
 });
 // 第5問  id='q5'の要素をクリックしたらこの要素にlargeというクラスを付与せよ。
-$('#q5').click(function(){
+$('#q5').click(function() {
   $(this).addClass('large');//addclassでクリックしたときにlargeクラスを出して大きくした
 });
 // 第6問  id='q6'の要素をクリックしたらこの要素を2秒かけてmargin-topとmargin-leftを100pxの位置に移動させよ。
-$('#q6').click(function(){
+$('#q6').click(function() {
   $(this).animate({
-    'marginLeft':100,
-    'marginTop':100
-  },2000)//animateで右下に時間指定して移動させる。
+    'marginLeft': 100,//第一引数にオブジェクト
+    'marginTop': 100
+  }, 2000)//animateで右下に時間指定して移動させる。
 });
 // 第7問  id='q7'の子要素をクリックしたら、その要素のインデックス（何番目か）をconsole.log()とalert()を用いて表示させよ。
-$('#q7').find('li').click(function(){//findでq7のliをとって、
+$('#q7').find('li').click(function() {//findでq7のliをとって、
   var targetNum = $(this).index();//インデックス番号出したいから変数targetNumに代入
   console.log(targetNum);//コンソールでアラートして表示。
   alert(targetNum);//表示の仕方はアラートで↑
 });
 // 第8問  id='q8'の要素をhoverしたらlargeというクラスを付与し、hoverが外れたら、クラスを削除せよ。
 $('#q8').hover(function(){
-  $(this).addClass('large');
+  $(this).addClass('large');//
 },function(){
   $(this).removeClass('large');//ホバーが外れたときにクラス消える
 });
 // 第9問  id='q9'の要素をクリックしたらこの要素に設定してあるdata属性をconsoleに表示せよ。
 $('#q9').click(function(){
   var text = $(this).data('text');//data、データ
-  console.log(text);//data独自のクラスをつくってコンソール。
+  console.log(text);//data属性のクラスをつくってコンソール。
 });
 // 第10問 id='q10'の子要素をクリックしたら、その要素のインデックスと等しいid='q11'の子要素にlargeというクラスを追加せよ。
 $('#q10').find('li').click(function(){//q10のliクリック時動かしたい
   var num = $(this).index();//ナムにインデックス代入して
   $('#q11').find('li').eq(num).addClass('large');
-})//q10のliクリックしたときに.eqでq10,q11を正しい番号を指定しアドクラスで大きく。
+})//q10のliクリックしたときに.eq(イーキュー。インデックス指定)でq10,q11を正しい番号を指定しアドクラスで大きく。
+});
 </script>
 </body>
 </html>
