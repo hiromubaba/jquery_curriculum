@@ -48,9 +48,10 @@
     <script src="../../common/js/jquery.js"></script>
     <script>
       // 今回やるのはドロップメニューです。
-      $(function(){
-        $('.menu__list').children().hover(function(){
-          $(this).children().stop().slideDown()
+//フアインドとチルドレインちがい調べる！！
+      $(function() {
+        $('.menu__list').children('li').hover(function(){
+          $(this).children('ul').stop().slideDown()//
         },//childrenで子要素を指定して親要素をホバーした時にメニューをしたに出す
         function(){
           $(this).children('ul').stop().slideUp()

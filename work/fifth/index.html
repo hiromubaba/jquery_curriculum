@@ -86,16 +86,16 @@
     <script>
       // 今回やるのはソート機能です。
 $(function() {
-  $('.select').change(function(){ // .change()使用
-    var list = $(this).val(); // .val()使用
+  $('.select').change(function(){ // .change() セレクトボックスの値の変更をキャッチする関数
+    var list = $(this).val(); // .val() 要素のvalueを取得
     if(list == "all"){
       $('ul.list li').each(function(){ $(this).show() }); // .each()使用
-      } else {
+      } else {　　　// $().each() DOM要素を1つずつループ処理をする（ループ内で$(this)を使うと要素がひとつずつ取得できる）
       $('ul.list li').each(function(){
-        if($(this).data('category-type') == list){ // .data()使用
-          $(this).show(); // .show()使用
+        if($(this).data('category-type') == list){ // .data('') DOM要素にあるdata-~を取得できる
+          $(this).show(); // .show() 要素を表示させる
         } else {
-          $(this).hide(); // .hide()使用
+          $(this).hide(); // .hide() 要素を隠す
         }
       });
     }
@@ -107,12 +107,21 @@ $(function() {
       // ・セレクトボックスのvalueとliのdata-category-typeが一致しているものをだけ表示させる。
       // ・Allを選択した場合のみ全てのliを表示させる。
       // [使うメソッド]
-      // .show() 要素を表示させる
-      // .hide() 要素を隠す
-      // .val() 要素のvalueを取得
-      // .data('') DOM要素にあるdata-~を取得できる
-      // .change() セレクトボックスの値の変更をキャッチする関数
-      // $().each() DOM要素を1つずつループ処理をする（ループ内で$(this)を使うと要素がひとつずつ取得できる）
+      
+      
+      
+      
+      
+      
+// findとchildrenの違い
+// find 対象要素よりした全てを取得できる。子要素、子孫要素
+// children 一つしたの段層まで子要素取得できる。
+
+// clickとonの違い
+// clickはクリックしたときにイベントが起きる
+// onはクリックだけではなくいろんなイベントに対応できる便利。
+
+// function HTMLで!doctypeを書くようにfunctionも必ず書く。エラーを検出しやすくするためである？
     </script>
   </body>
 </html>
