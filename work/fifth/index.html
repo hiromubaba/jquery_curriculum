@@ -86,15 +86,15 @@
     <script>
       // 今回やるのはソート機能です。
 $(function() {
-  $('.select').change(function(){ // .change() セレクトボックスの値の変更をキャッチする関数
+  $('.select').change(function(){ // .change() チェンジ セレクトボックスの値の変更をキャッチする関数
     var list = $(this).val(); // .val() 要素のvalueを取得
-    if(list == "all"){
-      $('ul.list li').each(function(){ $(this).show() }); // .each()使用
+    if(list == "all"){　//ここでバリューとリストを等しくして、一致しているものをだけ表示させる。
+      $('ul.list li').each(function(){ $(this).show() }); // .each イーチ ()使用　//等しかったときul.list liが一つずつ処理されていく。
       } else {　　　// $().each() DOM要素を1つずつループ処理をする（ループ内で$(this)を使うと要素がひとつずつ取得できる）
       $('ul.list li').each(function(){
-        if($(this).data('category-type') == list){ // .data('') DOM要素にあるdata-~を取得できる
+        if($(this).data('category-type') == list){ // .dataデータ('') DOM要素にあるdata-~を取得できる　category（カテゴリー）
           $(this).show(); // .show() 要素を表示させる
-        } else {
+        } else {//ifが合わなかった時要素を隠している
           $(this).hide(); // .hide() 要素を隠す
         }
       });
@@ -121,7 +121,7 @@ $(function() {
 // clickはクリックしたときにイベントが起きる
 // onはクリックだけではなくいろんなイベントに対応できる便利。
 
-// function HTMLで!doctypeを書くようにfunctionも必ず書く。エラーを検出しやすくするためである？
+// function HTMLで!doctype（ドックタイプ）を書くようにfunctionも必ず書く。エラーを検出しやすくするためである？
     </script>
   </body>
 </html>
