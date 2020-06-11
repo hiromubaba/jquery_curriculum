@@ -91,11 +91,11 @@ $(function() {
     if(list === "all"){　//ここでall選択した時は全ての要素表示！
       $('.list li').show();
       } else { //allが選ばれなかった時は
-      $('.list li').each(function(){ //等しかったときlist liが一つずつ処理されていく。$().each() DOM要素を1つずつループ処理をする
-        if($(this).data('category-type') === list){ // .dataデータ('') DOM要素にあるdata-~を取得できる　category（カテゴリー）
-          $(this).show(); // .show() 要素を表示させる
+      $('.list li').each(function(index,element){ //等しかったときlist liが一つずつ処理されていく。$().each() DOM要素を1つずつループ処理をする
+        if($(element).data('category-type') === list){ // .dataデータ('') DOM要素にあるdata-~を取得できる　category（カテゴリー）
+          $(element).show(); // .show() 要素を表示させる
         } else {//ifが合わなかった時要素を隠している
-          $(this).hide(); // .hide()ハイド 要素を隠す
+          $(element).hide(); // .hide()ハイド 要素を隠す
         }
       });
     }
@@ -108,7 +108,7 @@ $(function() {
       // ・Allを選択した場合のみ全てのliを表示させる。
       // [使うメソッド]
       
-      
+      //コメントはコードの横に書かない。＊カンニング
       //thisを使わない実装。　９２からeach外して実装。
       //厳密等価比較演算子　型まで見て比較。===
       
