@@ -57,10 +57,14 @@
           applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
           booksGenreId: '001',
           keyword: 'String',
-          hits: '20'
+          hits: '20',
+          page: '1'
         },
         }).done(function(data) {
           // この中にデータ取得後の動きを記述していきます。
+          $('.search__btn').click(function(){
+            
+          })
           
           console.log(data);
         });
