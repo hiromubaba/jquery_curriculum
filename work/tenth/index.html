@@ -22,14 +22,16 @@
           <button id="js-search-button" class="search__btn">検索する</button>
         </div>
         <ul class="lists">
-          <div class='lists__item__inner'>
-            <a href='' class='lists__item__link' target='_blank'>
-              <img src='' class='lists__item__img' alt=''>
-              <p class='lists__item__detail'>作品名：</p>
-              <p class='lists__item__detail'>作者　：</p>
-              <p class='lists__item__detail'>出版社：</p>
-            </a>
-          </div>
+          <li class='lists__item'>
+            <div class='lists__item__inner'>
+              <a href='' class='lists__item__link' target='_blank'>
+                <img src='' class='lists__item__img' alt=''>
+                <p class='lists__item__detail'>作品名：</p>
+                <p class='lists__item__detail'>作者　：</p>
+                <p class='lists__item__detail'>出版社：</p>
+              </a>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -56,15 +58,13 @@
         //     // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
           applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
           booksGenreId: '001',
-          keyword: 'String',
+          keyword: 'searchword',
           hits: '20',
           page: '1'
         },
         }).done(function(data) {
           // この中にデータ取得後の動きを記述していきます。
-          $('.search__btn').click(function(){
-            
-          })
+          
           
           console.log(data);
         });
