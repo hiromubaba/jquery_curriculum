@@ -53,25 +53,29 @@
         //     // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
           applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
           booksGenreId: '001',
-          keyword: 'searchword',
+          keyword: search,
           hits: '20',
           page: '1'
         },
         }).done(function(data) {　// 通信成功の処理　この中にデータ取得後の動きを記述していきます。
-          console.log(data.hits);
-        //検索結果が０件の場合
-        if (data.hits === 0) {
+          if (data.hits === 0) {
           $('.lists').after('<div class="coment"></div>')
           coment = $('.coment');
           coment.html('<p class="message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>');
-        }  else if (data.keyword.val(searchword) === 0) {
-          $('.lists').after('<div class="zero"></div>')
-          zero = $('.zero');
-          zero.html('<p class="message">文字が入力されてません。<br>文字を入力してください。</p>');
-        }
+        } else {
+          $('.lists').prepend('<li class='lists__item'>
+       <div class='lists__item__inner'>
+         <a href='' class='lists__item__link' target='_blank'>
+           <img src='' class='lists__item__img' alt=''>
+           <p class='lists__item__detail'>作品名：</p>
+           <p class='lists__item__detail'>作者　：</p>
+           <p class='lists__item__detail'>出版社：</p>
+         </a>
+       </div>
+      </li>')}
       })
+      });
     });
-  });
       //
       //
       // $.ajaxによってデータが取得できたら、必要なデータ(作品名とか作者名とか)を取得します。
