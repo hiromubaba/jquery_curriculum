@@ -63,12 +63,23 @@
           coment = $('.coment');
           coment.html('<p class="message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>');
         } else {
-          $.each(data.Items, function functionName(index,val) {
-            $('lists').prepend("<li class='lists__item'>,<div class='lists__item__inner'>,<a href='' class='lists__item__link' target='_blank'>,<img src='' class='lists__item__img' alt=''>,<p class='lists__item__detail'>作品名：</p>,<p class='lists__item__detail'>作者：</p>,<p class='lists__item__detail'>出版社：</p>,</a></div></li>");
-            console.log(data.Items[1].Items.title)
-          })
+          $.each(data.Items, function functionName(i,item) {
+            var status = '<li class= "lists__item">'+
+              '<div class= "lists__item__inner">'+
+              '<a href= class= "lists__item__link" target= "_blank">'+
+                '<img src="'+ item.Item.mediumImageUrl +'" class= "lists__item__img" alt='+'>'+
+                '<p class= "lists__item__detail">作品名：'+ data.Items[i].Item.title +'</p>'+
+                '<p class= "lists__item__detail">作者　：'+ data.Items[i].Item.author +'</p>'+
+                '<p class= "lists__item__detail">出版社：'+ data.Items[i].Item.publisherName +'</p>'+
+              '</a>'+'</div>'+'</li>';
+            $('.lists').prepend(status);//プリペンド 前にlists
+            })
           }
-      })
+        }).fall(function() {
+          $('.lists').after('<div class= "fallcoment"></div>')
+          fallcoment = $('fallcoment');
+          fallcoment.html('<p class="fallmessage">データ通信できませんでした。</p>');
+        })
       });
     });
       //
