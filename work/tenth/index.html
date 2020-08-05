@@ -74,16 +74,15 @@
               '</a>'+'</div>'+'</li>';
             $('.lists').prepend(status);//プリペンド 前にlists
           });
-          $(function(){
+        }$(function(){
             var pager = '<div class="js-pager">'+
                '<ul class="btn-wrapper">'+
                '<li class= "prev btn-item">'+'<a class="btn-anchor" href="">'+ 前へ +'</a></li>'+
                '<li class="next btn-item">'+'<a class="btn-anchor" href="">'+ 次へ +'</a></li>'+
               '</ul>'+
             '</div>';
-            $('.btn-anchor').after(pager);
+            $('.lists').after(pager);
           })
-        }
         }).fall(function() {
           $('.lists').after('<div class= "fallcoment"></div>')
           fallcoment = $('fallcoment');
