@@ -73,8 +73,17 @@
                 '<p class= "lists__item__detail">出版社：'+ data.Items[i].Item.publisherName +'</p>'+
               '</a>'+'</div>'+'</li>';
             $('.lists').prepend(status);//プリペンド 前にlists
-            })
-          }
+          });
+          $(function(){
+            var pager = '<div class="js-pager">'+
+               '<ul class="btn-wrapper">'+
+               '<li class= "prev btn-item">'+'<a class="btn-anchor" href="">'+ 前へ +'</a></li>'+
+               '<li class="next btn-item">'+'<a class="btn-anchor" href="">'+ 次へ +'</a></li>'+
+              '</ul>'+
+            '</div>';
+            $('.btn-anchor').after(pager);
+          })
+        }
         }).fall(function() {
           $('.lists').after('<div class= "fallcoment"></div>')
           fallcoment = $('fallcoment');
