@@ -77,11 +77,11 @@
         } $(function(){
             var pager = '<div class="js-pager">'+
                '<ul class="btn-wrapper">'+
-               '<li class= "prev btn-item">'+'<a class="btn-anchor" href="">'+ 前へ +'</a></li>'+
-               '<li class="next btn-item">'+'<a class="btn-anchor" href="">'+ 次へ +'</a></li>'+
+               '<li class= "prev btn-item">'+'<a class="btn-anchor" href="">'+ 前へ +'</a>'+'</li>'+
+               '<li class="next btn-item">'+'<a class="btn-anchor" href="">'+ 次へ +'</a>'+'</li>'+
               '</ul>'+
             '</div>';
-            $('.js-pager').prepend(pager);
+            $('.lists').after(pager);
           })
         })
         // .fall(function() {
