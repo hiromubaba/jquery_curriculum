@@ -88,13 +88,13 @@
 $(function() {
   $('.select').change(function(){ // .change() チェンジ セレクトボックスの値の変更をキャッチする関数
     var list = $(this).val(); // .val() 要素のvalueを取得
-    if(list === "all"){　//ここでall選択した時は全ての要素表示！
+    if(list === "all"){　
       $('.list li').show();
-      } else { //allが選ばれなかった時は
+      } else { 
       $('.list li').each(function(index,element){ //等しかったときlist liが一つずつ処理されていく。$().each() DOM要素を1つずつループ処理をする
         if($(element).data('category-type') === list){ // .dataデータ('') DOM要素にあるdata-~を取得できる　category（カテゴリー）
           $(element).show(); // .show() 要素を表示させる
-        } else {//ifが合わなかった時要素を隠している
+        } else {
           $(element).hide(); // .hide()ハイド 要素を隠す
         }
       });

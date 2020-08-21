@@ -84,8 +84,9 @@
           $('.lists').after(pager);
         })
         // ページャクリックイベント
-        $('.btn-anchor').click(function(){
-          after(pager);
+        $('.btn-anchor').click(function(e){
+          e.preventDefault();
+          $('.lists').prepend(data);
         });
         })
       });
