@@ -40,54 +40,55 @@
       // 以下は今回使う$.ajaxの基本的な形です。
       //
       $(function(){
-        //クリックした時処理。
+        // ページャクリックイベント
+        $(document).on('click', 'next btn-item', function(e){
+          e.preventDefault();
+          $('.lists').prepend(status);
+         
+        });
+        //検索クリックイベント
         $('.search__btn').on('click', function () {
             var search = $('.search__text__input').val();
             console.log(search);
-
+          
         $.ajax({
           url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
           type: 'GET',
           datatype: 'json',
           data: {
           // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
-          applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
-          booksGenreId: '001',
-          keyword: search,
-          hits: '20',
-          page: '1'
+            applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
+            booksGenreId: '001',
+            keyword: search,
+            hits: 20,
+            page: 100
           },
         }).done(function(data) {
           if (data.hits === 0) {
-            $('.lists').after('<div class="coment"></div>')
-            coment = $('.coment');
-            coment.html('<p class="message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>');
+            $('.lists').after('<div class="message"></div>')
+            message = $('.message');
+            message.html('<p class="error-message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>');
           } else {
-            $.each(data.Items, function functionName(i,item) {
+            $.each(data.Items, function (i,item) {
               var status = '<li class= "lists__item">'+
                 '<div class= "lists__item__inner">'+
                 '<a href= class= "lists__item__link" target= "_blank">'+
                   '<img src="'+ item.Item.mediumImageUrl +'" class= "lists__item__img" alt='+'>'+
-                  '<p class= "lists__item__detail">作品名：'+ data.Items[i].Item.title +'</p>'+
-                  '<p class= "lists__item__detail">作者　：'+ data.Items[i].Item.author +'</p>'+
-                  '<p class= "lists__item__detail">出版社：'+ data.Items[i].Item.publisherName +'</p>'+
+                  '<p class= "lists__item__detail">作品名：'+ item.Item.title +'</p>'+
+                  '<p class= "lists__item__detail">作者　：'+ item.Item.author +'</p>'+
+                  '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
                 '</a>'+'</div>'+'</li>';
               $('.lists').prepend(status);//プリペンド 前にlists
             });
           }
           var pager = '<div class="js-pager">'+
             '<ul class="btn-wrapper">'+
-              '<li class= "prev btn-item">'+'<a class="btn-anchor" href="">'+ "前へ" +'</a>'+'</li>'+
+              '<li class= "prev btn-item disabled">'+'<a class="btn-anchor" href="">'+ "前へ" +'</a>'+'</li>'+
               '<li class="next btn-item">'+'<a class="btn-anchor" href="">'+ "次へ" +'</a>'+'</li>'+
             '</ul>'+
           '</div>';
           $('.lists').after(pager);
         })
-        // ページャクリックイベント
-        $('.btn-anchor').click(function(e){
-          e.preventDefault();
-          $('.lists').prepend(data);
-        });
         })
       });
       //

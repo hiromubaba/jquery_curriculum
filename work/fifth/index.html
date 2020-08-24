@@ -90,7 +90,7 @@ $(function() {
     var list = $(this).val(); // .val() 要素のvalueを取得
     if(list === "all"){　
       $('.list li').show();
-      } else { 
+      } else {
       $('.list li').each(function(index,element){ //等しかったときlist liが一つずつ処理されていく。$().each() DOM要素を1つずつループ処理をする
         if($(element).data('category-type') === list){ // .dataデータ('') DOM要素にあるdata-~を取得できる　category（カテゴリー）
           $(element).show(); // .show() 要素を表示させる
