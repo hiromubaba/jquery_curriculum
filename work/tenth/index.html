@@ -38,20 +38,21 @@
       // $.each(配列, function functionName() {}) 配列に対しての繰り返し処理
       // $.ajax({}) 外部ファイルやURLに対してデータをリクエストすることができます。
       // 以下は今回使う$.ajaxの基本的な形です。
-      //
+      
       $(function(){
         // ページャクリックイベント
         $(document).on('click', 'next btn-item', function(e){
           e.preventDefault();
           $('.lists').prepend(status);
-         
+          ajaxs();
         });
         //検索クリックイベント
         $('.search__btn').on('click', function () {
             var search = $('.search__text__input').val();
             console.log(search);
-          
-        $.ajax({
+            
+        function ajaxs(){
+          $.ajax({
           url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
           type: 'GET',
           datatype: 'json',
@@ -63,7 +64,8 @@
             hits: 20,
             page: 100
           },
-        }).done(function(data) {
+          })
+        }$.done(function(data) {
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
             message = $('.message');
@@ -91,8 +93,6 @@
         })
         })
       });
-      //
-
       // .fall(function() {
         //   $('.lists').after('<div class= "fallcoment"></div>')
         //   fallcoment = $('fallcoment');
