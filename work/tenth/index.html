@@ -44,14 +44,14 @@
         $(document).on('click', 'next btn-item', function(e){
           e.preventDefault();
           $('.lists').prepend(status);
-          ajaxs();
+          aj();
         });
         //検索クリックイベント
         $('.search__btn').on('click', function () {
             var search = $('.search__text__input').val();
             console.log(search);
-            
-        function ajaxs(){
+
+         function aj() {
           $.ajax({
           url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
           type: 'GET',
@@ -65,7 +65,7 @@
             page: 100
           },
           })
-        }$.done(function(data) {
+        }.done(function(data) {
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
             message = $('.message');
@@ -93,6 +93,7 @@
         })
         })
       });
+      
       // .fall(function() {
         //   $('.lists').after('<div class= "fallcoment"></div>')
         //   fallcoment = $('fallcoment');
