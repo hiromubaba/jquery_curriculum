@@ -41,17 +41,23 @@
       
       $(function(){
         // ページャクリックイベント
+      
         $(document).on('click', 'next btn-item', function(e){
           e.preventDefault();
-          $('.lists').prepend(status);
           aj();
+          num = 2
         });
+        
         //検索クリックイベント
         $('.search__btn').on('click', function () {
-            var search = $('.search__text__input').val();
-            console.log(search);
-
-         function aj() {
+          aj();
+          keyword = search
+          num = 1
+        });
+            // var search = $('.search__text__input').val();
+            // console.log(search);
+          
+        function aj() {
           $.ajax({
           url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
           type: 'GET',
@@ -60,12 +66,12 @@
           // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
             applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
             booksGenreId: '001',
-            keyword: search,
+            keyword: "",
             hits: 20,
             page: 100
           },
           })
-        }.done(function(data) {
+        .done(function(data) {
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
             message = $('.message');
@@ -91,7 +97,8 @@
           '</div>';
           $('.lists').after(pager);
         })
-        })
+        }
+        
       });
       
       // .fall(function() {
