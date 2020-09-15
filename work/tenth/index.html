@@ -45,17 +45,13 @@
         $(document).on('click', 'next btn-item', function(e){
           e.preventDefault();
           aj();
-          num = 2
         });
         
         //検索クリックイベント
         $('.search__btn').on('click', function () {
-          aj();
-          keyword = search
-          num = 1
+          var search = aj();
+          console.log(search);
         });
-            // var search = $('.search__text__input').val();
-            // console.log(search);
           
         function aj() {
           $.ajax({
@@ -66,9 +62,9 @@
           // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
             applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
             booksGenreId: '001',
-            keyword: "",
+            keyword: search,
             hits: 20,
-            page: num
+            page: 100
           },
           })
         .done(function(data) {
@@ -98,7 +94,6 @@
           $('.lists').after(pager);
         })
         }
-        
       });
       
       // .fall(function() {
