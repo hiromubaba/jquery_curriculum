@@ -49,8 +49,7 @@
         
         //検索クリックイベント
         $('.search__btn').on('click', function () {
-          var search = aj();
-          console.log(search);
+          aj();
         });
           
         function aj() {
@@ -74,7 +73,7 @@
             message.html('<p class="error-message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>');
           } else {
             $.each(data.Items, function (i,item) {
-              var status = '<li class= "lists__item">'+
+             status = '<li class= "lists__item">'+
                 '<div class= "lists__item__inner">'+
                 '<a href= class= "lists__item__link" target= "_blank">'+
                   '<img src="'+ item.Item.mediumImageUrl +'" class= "lists__item__img" alt='+'>'+
@@ -85,7 +84,7 @@
               $('.lists').prepend(status);//プリペンド 前にlists
             });
           }
-          var pager = '<div class="js-pager">'+
+          pager = '<div class="js-pager">'+
             '<ul class="btn-wrapper">'+
               '<li class= "prev btn-item disabled">'+'<a class="btn-anchor" href="">'+ "前へ" +'</a>'+'</li>'+
               '<li class="next btn-item">'+'<a class="btn-anchor" href="">'+ "次へ" +'</a>'+'</li>'+
