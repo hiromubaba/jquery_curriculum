@@ -41,10 +41,10 @@
       
       $(function(){
         // ページャクリックイベント
-      
         $(document).on('click', 'next btn-item', function(e){
           e.preventDefault();
           aj();
+          
         });
         
         //検索クリックイベント
@@ -61,9 +61,9 @@
           // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
             applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
             booksGenreId: '001',
-            keyword: search,
+            // keyword: search,
             hits: 20,
-            page: 100
+            page: 1
           },
           })
         .done(function(data) {
@@ -73,7 +73,7 @@
             message.html('<p class="error-message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>');
           } else {
             $.each(data.Items, function (i,item) {
-             status = '<li class= "lists__item">'+
+              var status = '<li class= "lists__item">'+
                 '<div class= "lists__item__inner">'+
                 '<a href= class= "lists__item__link" target= "_blank">'+
                   '<img src="'+ item.Item.mediumImageUrl +'" class= "lists__item__img" alt='+'>'+
@@ -84,7 +84,7 @@
               $('.lists').prepend(status);//プリペンド 前にlists
             });
           }
-          pager = '<div class="js-pager">'+
+          var pager = '<div class="js-pager">'+
             '<ul class="btn-wrapper">'+
               '<li class= "prev btn-item disabled">'+'<a class="btn-anchor" href="">'+ "前へ" +'</a>'+'</li>'+
               '<li class="next btn-item">'+'<a class="btn-anchor" href="">'+ "次へ" +'</a>'+'</li>'+
