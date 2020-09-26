@@ -44,11 +44,13 @@
         $(document).on('click', 'next btn-item', function(e){
           e.preventDefault();
           aj();
-          
+
         });
         
         //検索クリックイベント
         $('.search__btn').on('click', function () {
+           search = $('search__text__input').val();
+          console.log(search);
           aj();
         });
           
@@ -61,7 +63,7 @@
           // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
             applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
             booksGenreId: '001',
-            // keyword: search,
+            keyword: search,
             hits: 20,
             page: 1
           },
