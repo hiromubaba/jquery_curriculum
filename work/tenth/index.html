@@ -40,16 +40,24 @@
       // 以下は今回使う$.ajaxの基本的な形です。
       
       $(function(){
-        // ページャクリックイベント
-        $(document).on('click', 'next btn-item', function(e){
-          e.preventDefault();
-          aj();
 
+        // ページャクリックイベント　前へ
+        $(document).on('click', 'prev btn-item', function(e){
+          
+          aj();
+          e.preventDefault();
+        });
+        
+        // ページャクリックイベント　次へ
+        $(document).on('click', 'next btn-item', function(e){
+          
+          aj();
+          e.preventDefault();
         });
         
         //検索クリックイベント
         $('.search__btn').on('click', function () {
-           search = $('search__text__input').val();
+          search = $('search__text__input').val();
           console.log(search);
           aj();
         });
@@ -88,7 +96,7 @@
           }
           var pager = '<div class="js-pager">'+
             '<ul class="btn-wrapper">'+
-              '<li class= "prev btn-item disabled">'+'<a class="btn-anchor" href="">'+ "前へ" +'</a>'+'</li>'+
+              '<li class= "prev btn-item">'+'<a class="btn-anchor" href="">'+ "前へ" +'</a>'+'</li>'+
               '<li class="next btn-item">'+'<a class="btn-anchor" href="">'+ "次へ" +'</a>'+'</li>'+
             '</ul>'+
           '</div>';
