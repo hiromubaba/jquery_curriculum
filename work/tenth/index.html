@@ -40,8 +40,8 @@
       // 以下は今回使う$.ajaxの基本的な形です。
       
       $(function(){
-        var search = $('#js-search-word').val();
-        page = 1
+        // var search = $('#js-search-word').val();
+        // page = 1
         // ページャクリックイベント　前へ
         $(document).on('click', 'prev btn-item', function(e){
           
@@ -51,14 +51,16 @@
         
         // ページャクリックイベント　次へ
         $(document).on('click', 'next btn-item', function(e){
-          page = 2
+          page = [];
+          for (var i = 0; i < page; i++);
+          console.log(page[i]);
           aj();
-          e.preventDefault();
+          // e.preventDefault();
         });
         
         //検索クリックイベント
         $('.search__btn').on('click', function () {
-          search = $('js-search-word').val();
+          search = $('#js-search-word').val();
           // console.log(search);
           page = 1
           aj();
