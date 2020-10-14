@@ -41,7 +41,7 @@
       
       $(function(){
         // var search = $('#js-search-word').val();
-        // page = 1
+        page = 1
         // ページャクリックイベント　前へ
         $(document).on('click', 'prev btn-item', function(e){
           
@@ -51,9 +51,9 @@
         
         // ページャクリックイベント　次へ
         $(document).on('click', 'next btn-item', function(e){
-          page = [];
           for (var i = 0; i < page.length; i++);
           console.log(page[i]);
+          page = 2
           aj();
           // e.preventDefault();
         });
