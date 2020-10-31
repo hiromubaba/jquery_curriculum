@@ -53,7 +53,10 @@
         $(document).on('click', '.next', function(){
           page = 2
           aj();
-          
+          if (page < 3) {
+            $('.prev').removeClass('disabled');
+            console.log('!!');
+          }
           // e.preventDefault();
         });
         
@@ -103,7 +106,10 @@
             '</ul>'+
           '</div>';
           $('.lists').after(pager);
-          $('.prev').addClass('disabled');
+          if (page === 1) {
+            $('.prev').addClass('disabled');
+            console.log('add');
+          }
         })
         }
       });
