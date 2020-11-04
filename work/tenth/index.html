@@ -46,6 +46,9 @@
         // ページャクリックイベント　前へ
         $(document).on('click', 'prev btn-item', function(){
           aj();
+          if (page === 1) {
+            $('.prev').addClass('disabled');
+          }
           // e.preventDefault();
         });
         
@@ -53,10 +56,11 @@
         $(document).on('click', '.next', function(){
           page = 2
           aj();
-          if (page < 3) {
-            $('.prev').removeClass('disabled');
+          if ('page : last') {
+            $('.next').addClass('disabled');
             console.log('!!');
           }
+          delete data
           // e.preventDefault();
         });
         
@@ -108,7 +112,7 @@
           $('.lists').after(pager);
           if (page === 1) {
             $('.prev').addClass('disabled');
-            console.log('add');
+            console.log('--');
           }
         })
         }
