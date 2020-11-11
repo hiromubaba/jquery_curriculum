@@ -58,9 +58,9 @@
           aj();
           if ('page : last') {
             $('.next').addClass('disabled');
-            console.log('!!');
+            console.log('next');
           }
-          delete data
+          $('.lists').delete();
           // e.preventDefault();
         });
         
@@ -101,6 +101,7 @@
                   '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
                 '</a>'+'</div>'+'</li>';
               $('.lists').prepend(status);//プリペンド 前にlists
+              
             });
           }
           var pager = '<div class="js-pager">'+
