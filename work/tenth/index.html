@@ -55,14 +55,12 @@
         
         // ページャクリックイベント　次へ
         $(document).on('click', '.next', function(){
-          page = 2
+          page++;
           aj();
           if ('page : last') {
             $('.next').addClass('disabled');
             console.log('next');
           }
-          $('.lists').detach();
-          // e.preventDefault();
         });
         
         //検索クリックイベント
