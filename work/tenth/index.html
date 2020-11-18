@@ -45,23 +45,26 @@
         
         // ページャクリックイベント　前へ
         $(document).on('click', 'prev btn-item', function(){
-          aj();
           if (page === 1) {
             $('.prev').addClass('disabled');
           }
+          // $('.lists li').prev().append();
+          aj();
+          
           
           // e.preventDefault();
         });
         
         // ページャクリックイベント　次へ
         $(document).on('click', '.next', function(){
-          page++;
-          aj();
-          if ('page : last') {
+          if (page.hits === last) {
             $('.next').addClass('disabled');
             console.log('next');
           }
-          $('.lists').detach();
+          $('.lists li').detach();
+          $('.js-pager').detach();
+          page++;
+          aj();
         });
         
         //検索クリックイベント
@@ -101,7 +104,6 @@
                   '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
                 '</a>'+'</div>'+'</li>';
               $('.lists').prepend(status);//プリペンド 前にlists
-              
             });
           }
           var pager = '<div class="js-pager">'+
