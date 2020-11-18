@@ -49,6 +49,7 @@
           if (page === 1) {
             $('.prev').addClass('disabled');
           }
+          
           // e.preventDefault();
         });
         
@@ -60,7 +61,7 @@
             $('.next').addClass('disabled');
             console.log('next');
           }
-          $('.lists').delete();
+          $('.lists').detach();
           // e.preventDefault();
         });
         
