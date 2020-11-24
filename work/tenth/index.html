@@ -41,25 +41,23 @@
       
       $(function(){
         // var search = $('#js-search-word').val();
-        page = 1
+        page = 1 //ここの変数代入は意味あるの？？
         
         // ページャクリックイベント　前へ
         $(document).on('click', 'prev btn-item', function(){
           if (page === 1) {
             $('.prev').addClass('disabled');
           }
-          // $('.lists li').prev().append();
+          page--;
           aj();
-          
-          
           // e.preventDefault();
         });
         
         // ページャクリックイベント　次へ
-        $(document).on('click', '.next', function(){
-          if (page.hits === last) {
+        $(document).on('click', '.nxt', function(){
+          if (pageCount === last) {
             $('.next').addClass('disabled');
-            console.log('next');
+            console.log('次削除');
           }
           $('.lists li').detach();
           $('.js-pager').detach();
@@ -104,6 +102,7 @@
                   '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
                 '</a>'+'</div>'+'</li>';
               $('.lists').prepend(status);//プリペンド 前にlists
+              console.log(data);
             });
           }
           var pager = '<div class="js-pager">'+
@@ -115,7 +114,7 @@
           $('.lists').after(pager);
           if (page === 1) {
             $('.prev').addClass('disabled');
-            console.log('--');
+            console.log('前削除');
           }
         })
         }
