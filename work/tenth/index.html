@@ -41,8 +41,9 @@
       
       $(function(){
         // var search = $('#js-search-word').val();
+
         page = 1 //ここの変数代入は意味あるの？？
-        pageCount = 100
+
         // ページャクリックイベント　前へ
         $(document).on('click', 'prev btn-item', function(){
           if (page === 1) {
@@ -50,9 +51,8 @@
           }
           page--;
           aj();
-          // e.preventDefault();
+          console.log('前');
         });
-        
         // ページャクリックイベント　次へ
         $(document).on('click', '.next', function(){
           $('.lists li').detach();
@@ -80,7 +80,6 @@
             keyword: search,
             hits: 20,
             page: page,
-            pageCount: 100
           },
           })
         .done(function(data) {
@@ -113,7 +112,8 @@
             $('.prev').addClass('disabled');
             console.log('前削除');
           }
-          if (pageCount < 100) {
+          
+          if (data.page === data.pageCount) {
             $('.next').addClass('disabled');
             console.log('次削除');
           }
