@@ -42,16 +42,13 @@
       $(function(){
         // var search = $('#js-search-word').val();
 
-        page = 1 //ここの変数代入は意味あるの？？
-
+        page = 1
         // ページャクリックイベント　前へ
-        $(document).on('click', 'prev btn-item', function(){
-          if (page === 1) {
-            $('.prev').addClass('disabled');
-          }
+        $(document).on('click', '.prev', function(){
+          $('.lists li').detach();
+          $('.js-pager').detach();
           page--;
           aj();
-          console.log('前');
         });
         // ページャクリックイベント　次へ
         $(document).on('click', '.next', function(){
@@ -82,6 +79,14 @@
             page: page,
           },
           })
+
+        .fail(function(jqXHR, textStatus, errorThrown) {
+          console.log(jqXHR.responseJSON);
+          $('.lists').after('<div class="message"></div>')
+          message = $('.message');
+          message.html('<p class="net-error">検索ができません</p>');
+        })
+        
         .done(function(data) {
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
@@ -108,14 +113,13 @@
             '</ul>'+
           '</div>';
           $('.lists').after(pager);
+
           if (page === 1) {
             $('.prev').addClass('disabled');
-            console.log('前削除');
           }
           
           if (data.page === data.pageCount) {
             $('.next').addClass('disabled');
-            console.log('次削除');
           }
         })
         }
