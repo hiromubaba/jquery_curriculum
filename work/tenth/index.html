@@ -82,9 +82,13 @@
 
         .fail(function(jqXHR, textStatus, errorThrown) {
           console.log(jqXHR.responseJSON);
-          $('.lists').after('<div class="message"></div>')
-          message = $('.message');
-          message.html('<p class="net-error">検索ができません</p>');
+          if (エラーの時) {
+            $('.lists').after('<div class="message"></div>')
+            message = $('.message');
+            message.html('<p class="net-error">検索ができません</p>');
+          } else {
+
+          }
         })
         
         .done(function(data) {
