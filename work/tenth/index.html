@@ -81,16 +81,24 @@
           })
 
         .fail(function(jqXHR, textStatus, errorThrown) {
-          console.log(jqXHR.responseJSON);
-          if (エラーの時) {
-            $('.lists').after('<div class="message"></div>')
-            message = $('.message');
-            message.html('<p class="net-error">検索ができません</p>');
-          } else {
-
+          var error = jqXHR.status;
+          switch (error) {
+            case 400:
+              $('.message').detach();
+              $('.lists').after('<div class="message"></div>')
+              message = $('.message');
+              message.html('<p class="kennsaku-error">検索ができません</p>')
+              break;
+            case 429:
+              message = $('.message');
+              message.html('<p class="rennda-error">連打しすぎです。</p>')
+              break;
+            case 500:
+              message = $('.message');
+              message.html('<p class="net-error">インターネットの接続がありません。</p>')
+              break;
           }
         })
-        
         .done(function(data) {
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
