@@ -80,27 +80,30 @@
             page: page,
           },
           })
-
         .fail(function(jqXHR) {
           var error = jqXHR.status;
           switch (error) {
             case 400:
-              $('.lists').after('<div class="message"></div>')
-              message = $('.message');
-              message.html('<p class="kennsaku-error">検索ができません</p>')
+              var errTxt = "検索ができません";
+              addMessage(errTxt);
               break;
             case 429:
-              message = $('.message');
-              message.html('<p class="rennda-error">連打しすぎです。</p>')
+              var errTxt = "連打しすぎです。";
+              addMessage(errTxt);
               break;
             case 500:
-              message = $('.message');
-              message.html('<p class="net-error">システムエラー。</p>')
+              var errTxt = "システムエラー。";
+              addMessage(errTxt);
               break;
             case 503:
-              message = $('.message');
-              message.html('<p class="maintenance-error">メンテナンス中。</p>')
+              var errTxt = "メンテナンス中。";
+              addMessage(errTxt);
               break;
+          }
+          function addMessage(text) {
+            $('.lists').after('<div class="message"></div>')
+            message = $('.message');
+            message.html('<p class="kennsaku-error">' + text + '</p>')
           }
         })
         .done(function(data) {
