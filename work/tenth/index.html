@@ -63,6 +63,7 @@
           search = $('#js-search-word').val();
           page = 1
           aj();
+          $('.message').detach();
         });
           
         function aj() {
@@ -80,11 +81,10 @@
           },
           })
 
-        .fail(function(jqXHR, textStatus, errorThrown) {
+        .fail(function(jqXHR) {
           var error = jqXHR.status;
           switch (error) {
             case 400:
-              $('.message').detach();
               $('.lists').after('<div class="message"></div>')
               message = $('.message');
               message.html('<p class="kennsaku-error">検索ができません</p>')
@@ -95,7 +95,11 @@
               break;
             case 500:
               message = $('.message');
-              message.html('<p class="net-error">インターネットの接続がありません。</p>')
+              message.html('<p class="net-error">システムエラー。</p>')
+              break;
+            case 503:
+              message = $('.message');
+              message.html('<p class="maintenance-error">メンテナンス中。</p>')
               break;
           }
         })
