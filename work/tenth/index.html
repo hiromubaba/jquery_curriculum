@@ -64,6 +64,8 @@
           page = 1
           aj();
           $('.message').detach();
+          $('.lists li').detach();
+          $('.js-pager').detach();
         });
           
         function aj() {
@@ -132,7 +134,6 @@
             '</ul>'+
           '</div>';
           $('.lists').after(pager);
-
           if (page === 1) {
             $('.prev').addClass('disabled');
           }
