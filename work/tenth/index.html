@@ -40,8 +40,6 @@
       // 以下は今回使う$.ajaxの基本的な形です。
       
       $(function(){
-        // var search = $('#js-search-word').val();
-
         page = 1
         // ページャクリックイベント　前へ
         $(document).on('click', '.prev', function(){
@@ -60,12 +58,13 @@
         
         //検索クリックイベント
         $('.search__btn').on('click', function () {
-          search = $('#js-search-word').val();
+          search = $('#js-search-word').val(); //検索欄に打った文字の取得
           page = 1
           aj();
           $('.message').detach();
           $('.lists li').detach();
           $('.js-pager').detach();
+          console.log(search);
         });
           
         function aj() {
@@ -82,6 +81,7 @@
             page: page,
           },
           })
+
         .fail(function(jqXHR) {
           var error = jqXHR.status;
           switch (error) {
@@ -108,6 +108,7 @@
             message.html('<p class="kennsaku-error">' + text + '</p>')
           }
         })
+        
         .done(function(data) {
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
