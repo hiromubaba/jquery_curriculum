@@ -43,7 +43,7 @@
         var page = 1
         var search = ''
         
-        function hit(data) { //ヒット関数化
+        function hit(data) {   //ヒット関数化
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
             message = $('.message');
@@ -77,8 +77,8 @@
           if (data.page === data.pageCount) {
             $('.next').addClass('disabled');
           }
-      }
-        function nohit(error) {//ノーヒット関数化
+        }
+        function nothit(error) {   //ノーヒット関数化
           var error = jqXHR.status;
             switch (error) {
               case 0:
@@ -103,8 +103,8 @@
               message = $('.message');
               message.html('<p class="kennsaku-error">' + text + '</p>')
             }
-          }
-
+        }
+          
         // ページャクリックイベント　前へ
         $(document).on('click', '.prev', function(){
           if ($(this).hasClass('disabled')) {
@@ -154,11 +154,11 @@
           }).done(function(data) {
               hit(data);
           }).fail(function(error) { //エラー時
-              nohit(error);
+              nothit(error);
+              console.log('!!!');
           })
         }
       });
-
       // $.ajaxによってデータが取得できたら、必要なデータ(作品名とか作者名とか)を取得します。
       // 取得できたらHTMLに<ul class='lists'></ul>を用意しているので、下のテンプレに沿ってデータを入れ込みましょう。
       // <li class='lists__item'>
