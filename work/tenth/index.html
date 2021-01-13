@@ -40,31 +40,36 @@
       // 以下は今回使う$.ajaxの基本的な形です。
       
       $(function(){
-        page = 1
+        var page = 1
+        var search = ''
         // ページャクリックイベント　前へ
         $(document).on('click', '.prev', function(){
-          $('.lists li').detach();
-          $('.js-pager').detach();
+          if (prbtn-anchorev == disabled) {
+            preventDefault
+          }
+          detach();
           page--;
           aj();
         });
         // ページャクリックイベント　次へ
         $(document).on('click', '.next', function(){
-          $('.lists li').detach();
-          $('.js-pager').detach();
+          detach();
           page++;
           aj();
         });
         
-        //検索クリックイベント
-        $('.search__btn').on('click', function () {
-          search = $('#js-search-word').val(); //検索欄に打った文字の取得
-          page = 1
-          aj();
-          $('.message').detach();
+        function detach() {
           $('.lists li').detach();
           $('.js-pager').detach();
-          console.log(search);
+        }
+        
+        //検索クリックイベント
+        $('.search__btn').on('click', function () {
+          search = $('#js-search-word').val();　//検索欄に打った文字の取得
+          page = 1
+          $('.message').detach();
+          detach();
+          aj();
         });
           
         function aj() {
@@ -74,34 +79,35 @@
           datatype: 'json',
           data: {
           // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
-            applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください
-            booksGenreId: '001',
+            applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください アプリID
+            booksGenreId: '001',//ジャンルを特定するためのID
             keyword: search,
             hits: 20,
             page: page,
           },
           })
 
-        .fail(function(jqXHR) {
+        .fail(function(jqXHR) { //エラー時
           var error = jqXHR.status;
           switch (error) {
+            case 0:
+              var errTxt = "オフラインです。";
+              break;
             case 400:
               var errTxt = "検索ができません";
-              addMessage(errTxt);
               break;
             case 429:
               var errTxt = "連打しすぎです。";
-              addMessage(errTxt);
               break;
             case 500:
               var errTxt = "システムエラー。";
-              addMessage(errTxt);
               break;
             case 503:
               var errTxt = "メンテナンス中。";
-              addMessage(errTxt);
               break;
           }
+          addMessage(errTxt);
+
           function addMessage(text) {
             $('.lists').after('<div class="message"></div>')
             message = $('.message');
@@ -115,8 +121,9 @@
             message = $('.message');
             message.html('<p class="error-message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>');
           } else {
+            var status = ''
             $.each(data.Items, function (i,item) {
-              var status = '<li class= "lists__item">'+
+             status = '<li class= "lists__item">'+
                 '<div class= "lists__item__inner">'+
                 '<a href= class= "lists__item__link" target= "_blank">'+
                   '<img src="'+ item.Item.mediumImageUrl +'" class= "lists__item__img" alt='+'>'+
@@ -124,9 +131,9 @@
                   '<p class= "lists__item__detail">作者　：'+ item.Item.author +'</p>'+
                   '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
                 '</a>'+'</div>'+'</li>';
-              $('.lists').prepend(status);//プリペンド 前にlists
-              console.log(data);
+                　$('.lists').prepend(status);
             });
+            //プリペンド 先頭追加
           }
           var pager = '<div class="js-pager">'+
             '<ul class="btn-wrapper">'+
@@ -135,6 +142,7 @@
             '</ul>'+
           '</div>';
           $('.lists').after(pager);
+          
           if (page === 1) {
             $('.prev').addClass('disabled');
           }
@@ -145,12 +153,6 @@
         })
         }
       });
-      
-      // .fall(function() {
-        //   $('.lists').after('<div class= "fallcoment"></div>')
-        //   fallcoment = $('fallcoment');
-        //   fallcoment.html('<p class="fallmessage">データ通信できませんでした。</p>');
-        // })
 
       // $.ajaxによってデータが取得できたら、必要なデータ(作品名とか作者名とか)を取得します。
       // 取得できたらHTMLに<ul class='lists'></ul>を用意しているので、下のテンプレに沿ってデータを入れ込みましょう。
