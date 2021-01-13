@@ -134,10 +134,13 @@
                   '<p class= "lists__item__detail">作品名：'+ item.Item.title +'</p>'+
                   '<p class= "lists__item__detail">作者　：'+ item.Item.author +'</p>'+
                   '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
+                  '<img src="'+ item.Item.mediumImageUrl +'" class= "lists__item__img" alt='+'>'+
+                  '<p class= "lists__item__detail">作品名：'+ item.Item.title +'</p>'+
+                  '<p class= "lists__item__detail">作者　：'+ item.Item.author +'</p>'+
+                  '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
                 '</a>'+'</div>'+'</li>';
-                　$('.lists').prepend(status);
             });
-            //プリペンド 先頭追加
+            $('.lists').prepend(status);//プリペンド 先頭追加
           }
           var pager = '<div class="js-pager">'+
             '<ul class="btn-wrapper">'+
