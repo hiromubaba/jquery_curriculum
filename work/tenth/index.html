@@ -42,9 +42,8 @@
       $(function(){
         var page = 1
         var search = ''
-
-        function hit() {
-        $.done(function(data) {
+        
+        function hit(data) { //ヒット関数化
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
             message = $('.message');
@@ -78,9 +77,33 @@
           if (data.page === data.pageCount) {
             $('.next').addClass('disabled');
           }
-        })
       }
-
+        function nohit(error) {//ノーヒット関数化
+          var error = jqXHR.status;
+            switch (error) {
+              case 0:
+                var errTxt = "オフラインです。";
+                break;
+              case 400:
+                var errTxt = "検索ができません";
+                break;
+              case 429:
+                var errTxt = "連打しすぎです。";
+                break;
+              case 500:
+                var errTxt = "システムエラー。";
+                break;
+              case 503:
+                var errTxt = "メンテナンス中。";
+                break;
+            }
+            addMessage(errTxt);
+            function addMessage(text) {
+              $('.lists').after('<div class="message"></div>')
+              message = $('.message');
+              message.html('<p class="kennsaku-error">' + text + '</p>')
+            }
+          }
 
         // ページャクリックイベント　前へ
         $(document).on('click', '.prev', function(){
@@ -128,36 +151,11 @@
             hits: 20,
             page: page,
           },
+          }).done(function(data) {
+              hit(data);
+          }).fail(function(error) { //エラー時
+              nohit(error);
           })
-          .done(function() {
-          hit();
-        })
-        .fail(function(jqXHR) { //エラー時
-          var error = jqXHR.status;
-          switch (error) {
-            case 0:
-              var errTxt = "オフラインです。";
-              break;
-            case 400:
-              var errTxt = "検索ができません";
-              break;
-            case 429:
-              var errTxt = "連打しすぎです。";
-              break;
-            case 500:
-              var errTxt = "システムエラー。";
-              break;
-            case 503:
-              var errTxt = "メンテナンス中。";
-              break;
-          }
-          addMessage(errTxt);
-          function addMessage(text) {
-            $('.lists').after('<div class="message"></div>')
-            message = $('.message');
-            message.html('<p class="kennsaku-error">' + text + '</p>')
-          }
-        })
         }
       });
 
