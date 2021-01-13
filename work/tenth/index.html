@@ -43,9 +43,10 @@
         var page = 1
         var search = ''
         // ページャクリックイベント　前へ
+        
         $(document).on('click', '.prev', function(){
-          if (prbtn-anchorev == disabled) {
-            preventDefault
+          if ($(this).hasClass('disabled')) {
+            return false;
           }
           detach();
           page--;
@@ -53,6 +54,9 @@
         });
         // ページャクリックイベント　次へ
         $(document).on('click', '.next', function(){
+          if ($(this).hasClass('disabled')) {
+            return false;
+          }
           detach();
           page++;
           aj();
