@@ -42,8 +42,9 @@
       $(function(){
         var page = 1
         var search = ''
-        
-        function hit(data) {   //ヒット関数化
+
+        // 成功時 関数化
+        function hit(data) {
           if (data.hits === 0) {
             $('.lists').after('<div class="message"></div>')
             message = $('.message');
@@ -62,6 +63,7 @@
             });
             $('.lists').prepend(status);//プリペンド 先頭追加
           }
+          // ページャ表示
           var pager = '<div class="js-pager">'+
             '<ul class="btn-wrapper">'+
               '<li class= "prev btn-item ">'+'<a class="btn-anchor" href="#">'+ "前へ" +'</a>'+'</li>'+
@@ -78,7 +80,9 @@
             $('.next').addClass('disabled');
           }
         }
-        function nothit(error) {   //ノーヒット関数化
+
+        // エラー時関数化
+        function nothit(jqXHR) {
           var error = jqXHR.status;
             switch (error) {
               case 0:
@@ -98,6 +102,7 @@
                 break;
             }
             addMessage(errTxt);
+
             function addMessage(text) {
               $('.lists').after('<div class="message"></div>')
               message = $('.message');
@@ -114,6 +119,7 @@
           page--;
           aj();
         });
+
         // ページャクリックイベント　次へ
         $(document).on('click', '.next', function(){
           if ($(this).hasClass('disabled')) {
@@ -123,13 +129,14 @@
           page++;
           aj();
         });
-        
+
+        //　detach関数化
         function detach() {
           $('.lists li').detach();
           $('.js-pager').detach();
         }
         
-        //検索クリックイベント
+        // 検索クリックイベント
         $('.search__btn').on('click', function () {
           search = $('#js-search-word').val();　//検索欄に打った文字の取得
           page = 1
@@ -138,6 +145,7 @@
           aj();
         });
           
+        //ajax通信
         function aj() {
           $.ajax({
           url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
@@ -151,14 +159,14 @@
             hits: 20,
             page: page,
           },
-          }).done(function(data) {
+          }).done(function(data) { //成功時
               hit(data);
           }).fail(function(error) { //エラー時
               nothit(error);
-              console.log('!!!');
           })
         }
       });
+      
       // $.ajaxによってデータが取得できたら、必要なデータ(作品名とか作者名とか)を取得します。
       // 取得できたらHTMLに<ul class='lists'></ul>を用意しているので、下のテンプレに沿ってデータを入れ込みましょう。
       // <li class='lists__item'>
