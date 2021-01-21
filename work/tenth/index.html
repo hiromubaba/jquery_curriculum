@@ -44,32 +44,32 @@
         var search = ''
 
         // 成功時 関数化
-        function hit(data) {
+        function resultsuccess(data) {
           if (data.hits === 0) {
-            $('.lists').after('<div class="message"></div>')
-            message = $('.message');
-            message.html('<p class="error-message">検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。</p>');
+            addMessage('検索結果が見つかりませんでした。<br>別のキーワードで検索して下さい。');
           } else {
             var status = ''
             $.each(data.Items, function (i,item) {
-             status += '<li class= "lists__item">'+
-                '<div class= "lists__item__inner">'+
-                '<a href= class= "lists__item__link" target= "_blank">'+
-                  '<img src="'+ item.Item.mediumImageUrl +'" class= "lists__item__img" alt='+'>'+
-                  '<p class= "lists__item__detail">作品名：'+ item.Item.title +'</p>'+
-                  '<p class= "lists__item__detail">作者　：'+ item.Item.author +'</p>'+
-                  '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
-                '</a>'+'</div>'+'</li>';
+              status += '<li class= "lists__item">'+
+                          '<div class= "lists__item__inner">'+
+                            '<a href= class= "lists__item__link" target= "_blank">'+
+                              '<img src="'+ item.Item.mediumImageUrl +'" class= "lists__item__img" alt='+'>'+
+                              '<p class= "lists__item__detail">作品名：'+ item.Item.title +'</p>'+
+                              '<p class= "lists__item__detail">作者　：'+ item.Item.author +'</p>'+
+                              '<p class= "lists__item__detail">出版社：'+ item.Item.publisherName +'</p>'+
+                            '</a>'+
+                          '</div>'+
+                        '</li>';
             });
             $('.lists').prepend(status);//プリペンド 先頭追加
           }
           // ページャ表示
           var pager = '<div class="js-pager">'+
-            '<ul class="btn-wrapper">'+
-              '<li class= "prev btn-item ">'+'<a class="btn-anchor" href="#">'+ "前へ" +'</a>'+'</li>'+
-              '<li class="next btn-item ">'+'<a class="btn-anchor" href="#">'+ "次へ" +'</a>'+'</li>'+
-            '</ul>'+
-          '</div>';
+                          '<ul class="btn-wrapper">'+
+                            '<li class= "prev btn-item ">'+'<a class="btn-anchor" href="#">'+ "前へ" +'</a>'+'</li>'+
+                            '<li class="next btn-item ">'+'<a class="btn-anchor" href="#">'+ "次へ" +'</a>'+'</li>'+
+                          '</ul>'+
+                        '</div>';
           $('.lists').after(pager);
           
           if (page === 1) {
@@ -82,32 +82,32 @@
         }
 
         // エラー時関数化
-        function nothit(jqXHR) {
+        function Failure(jqXHR) {
           var error = jqXHR.status;
-            switch (error) {
-              case 0:
-                var errTxt = "オフラインです。";
-                break;
-              case 400:
-                var errTxt = "検索ができません";
-                break;
-              case 429:
-                var errTxt = "連打しすぎです。";
-                break;
-              case 500:
-                var errTxt = "システムエラー。";
-                break;
-              case 503:
-                var errTxt = "メンテナンス中。";
-                break;
-            }
-            addMessage(errTxt);
-
-            function addMessage(text) {
-              $('.lists').after('<div class="message"></div>')
-              message = $('.message');
-              message.html('<p class="kennsaku-error">' + text + '</p>')
-            }
+          var errTxt = '';
+          switch (error) {
+            case 0:
+              errTxt = "オフラインです。";
+              break;
+            case 400:
+              errTxt = "検索ができません";
+              break;
+            case 429:
+              errTxt = "連打しすぎです。";
+              break;
+            case 500:
+              errTxt = "システムエラー。";
+              break;
+            case 503:
+              errTxt = "メンテナンス中。";
+              break;
+          }
+          addMessage(errTxt);
+        }
+        function addMessage(text) {
+          $('.lists').after('<div class="message"></div>')
+          var message = $('.message');
+          message.html('<p class="kennsaku-error">' + text + '</p>')
         }
           
         // ページャクリックイベント　前へ
@@ -117,7 +117,7 @@
           }
           detach();
           page--;
-          aj();
+          bookajax();
         });
 
         // ページャクリックイベント　次へ
@@ -127,7 +127,7 @@
           }
           detach();
           page++;
-          aj();
+          bookajax();
         });
 
         //　detach関数化
@@ -142,27 +142,27 @@
           page = 1
           $('.message').detach();
           detach();
-          aj();
+          bookajax();
         });
           
         //ajax通信
-        function aj() {
+        function bookajax() {
           $.ajax({
-          url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
-          type: 'GET',
-          datatype: 'json',
-          data: {
+            url: 'https://app.rakuten.co.jp/services/api/BooksTotal/Search/20130522',
+            type: 'GET',
+            datatype: 'json',
+            data: {
           // 「区分:サービス固有パラメーター」を確認して、必要な情報をdata内に入れましょう。
-            applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください アプリID
-            booksGenreId: '001',//ジャンルを特定するためのID
-            keyword: search,
-            hits: 20,
-            page: page,
+              applicationId: '1019399324990976605', // (今回はこのIDを使用してください) ※IDは他サイト等には絶対に転載しないでください アプリID
+              booksGenreId: '001',//ジャンルを特定するためのID
+              keyword: search,
+              hits: 20,
+              page: page,
           },
           }).done(function(data) { //成功時
-              hit(data);
+            resultsuccess(data);
           }).fail(function(error) { //エラー時
-              nothit(error);
+            Failure(error);
           })
         }
       });
